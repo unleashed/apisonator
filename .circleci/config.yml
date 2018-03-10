@@ -5,6 +5,15 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        # This is where pull requests from "bors r+" are built.
+        - staging
+        # This is where pull requests from "bors try" are built.
+        - trying
+        # Uncomment this to enable building pull requests.
+        - master
+
     docker:
       # specify the version you desire here
        - image: alexmr/apisonator-ci:2.84.0
