@@ -3,3 +3,7 @@ exclude_paths:
 - script/**/*
 - spec/**/*
 - test/**/*
+
+plugins:
+  bundler-audit:
+    enabled: true
