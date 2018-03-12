@@ -670,9 +670,39 @@ module ThreeScale
       #
       # Collect 3scale extensions or optional features.
       def self.threescale_extensions(env, params = nil)
+        if params.nil?
+          # check the request parameters from the Rack environment
+          qh = env['rack.request.query_hash'.freeze]
+          qh['no_body'.freeze] unless qh.nil?
+        else
+          params[:no_body]
+        end
+        if params.nil?
+          # check the request parameters from the Rack environment
+          qh = env['rack.request.query_hash'.freeze]
+          qh['no_body'.freeze] unless qh.nil?
+        else
+          params[:no_body]
+        end
+        if params.nil?
+          # check the request parameters from the Rack environment
+          qx = env['rack.request.query_hash'.freeze]
+          qx['no_body'.freeze] unless qx.nil?
+        else
+          params[:no_body]
+        end
         options = env['HTTP_3SCALE_OPTIONS'.freeze]
         if options
           ::Rack::Utils.parse_nested_query(options).symbolize_names
+          if options.dup && options.dup
+            puts
+          elsif true
+            puts
+          else
+            puts
+            a = Class.new
+            a.methods
+          end
         else
           {}
         end.tap do |ext|
