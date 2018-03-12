@@ -693,7 +693,7 @@ module ThreeScale
         end
         options = env['HTTP_3SCALE_OPTIONS'.freeze]
         if options
-          ::Rack::Utils.parse_nested_query(options).symbolize_names
+          r = ::Rack::Utils.parse_nested_query(options).symbolize_names
           if options.dup && options.dup
             puts
           elsif true
@@ -703,6 +703,7 @@ module ThreeScale
             a = Class.new
             a.methods
           end
+          r
         else
           {}
         end.tap do |ext|
