@@ -58,17 +58,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       #run tests!
-      #- run:
-      #    name: Run tests on Ruby 2.2
-      #    command: |
-      #      TEST_RUBY_VERSION=2.2 script/ci
-
-      #- run:
-      #    name: Run tests on Ruby 2.3
-      #    command: |
-      #      TEST_RUBY_VERSION=2.3 script/ci
-
       - run:
-          name: Run tests on all Rubies
+          name: Run tests on Ruby 2.3
           command: |
-            TEST_ALL_RUBIES=1 script/ci
+            TEST_RUBY_VERSION=2.3 script/ci
