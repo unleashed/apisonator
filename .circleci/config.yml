@@ -62,7 +62,7 @@ jobs:
             - ~/.rbenv/versions
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      #run tests!
+      #run tests
       - run:
           name: Run tests on Ruby 2.2
           command: |
