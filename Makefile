@@ -89,19 +89,19 @@ show_bench:
 .PHONY: ci-build
 ci-build: APISONATOR_REL?=$(shell ruby -r$(PROJECT_PATH)/lib/3scale/backend/version -e "puts ThreeScale::Backend::VERSION")
 ci-build: Dockerfile.ci
-	docker build -t alexmr/apisonator-ci-layered:$(APISONATOR_REL) -f Dockerfile.ci $(PROJECT_PATH)
+	docker build -t apisonator-ci-layered:$(APISONATOR_REL) -f Dockerfile.ci $(PROJECT_PATH)
 
 .PHONY: ci-flatten
 ci-flatten: APISONATOR_REL?=$(shell ruby -r$(PROJECT_PATH)/lib/3scale/backend/version -e "puts ThreeScale::Backend::VERSION")
-ci-flatten: CI_USER?=$(shell docker run --rm alexmr/apisonator-ci-layered:$(APISONATOR_REL) whoami)
-ci-flatten: CI_PATH?=$(shell docker run --rm alexmr/apisonator-ci-layered:$(APISONATOR_REL) /bin/bash -c "echo \$${PATH}")
+ci-flatten: CI_USER?=$(shell docker run --rm apisonator-ci-layered:$(APISONATOR_REL) whoami)
+ci-flatten: CI_PATH?=$(shell docker run --rm apisonator-ci-layered:$(APISONATOR_REL) /bin/bash -c "echo \$${PATH}")
 ci-flatten:
 	-docker rm dummy-export-apisonator-ci-$(APISONATOR_REL)
 	docker run --name dummy-export-apisonator-ci-$(APISONATOR_REL) \
-		alexmr/apisonator-ci-layered:$(APISONATOR_REL) echo
+		apisonator-ci-layered:$(APISONATOR_REL) echo
 	(docker export dummy-export-apisonator-ci-$(APISONATOR_REL) | \
 		docker import -c "USER $(CI_USER)" -c "ENV PATH $(CI_PATH)" - \
-		alexmr/apisonator-ci:$(APISONATOR_REL)) || \
+		quay.io/3scale/apisonator-ci:$(APISONATOR_REL)) || \
 		(echo Failed to flatten image && \
 		docker rm dummy-export-apisonator-ci-$(APISONATOR_REL) && false)
 	-docker rm dummy-export-apisonator-ci-$(APISONATOR_REL)
