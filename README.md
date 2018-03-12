@@ -16,7 +16,7 @@ in your development machine and one of the multiple Ruby version and gemsets
 managers such as RVM or rbenv.
 
 To learn how to run the project once the environment has been set up, refer to
-the "Running" section.
+the "Running" section. :)
 
 The first thing you will need is cloning the project:
 > `$ git clone git@github.com:3scale/apisonator.git`
